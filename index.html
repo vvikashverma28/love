@@ -9,167 +9,135 @@
 <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;400&display=swap" rel="stylesheet">
 
 <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
 
 <style>
 
 body{
 margin:0;
 font-family:Poppins;
-background:linear-gradient(135deg,#ff758c,#ff7eb3,#ffc3a0);
-background-size:400% 400%;
-animation:bgmove 12s infinite alternate;
+background:linear-gradient(#05021b,#090033,#15003d);
 color:white;
 text-align:center;
 overflow-x:hidden;
 }
 
-/* animated gradient */
+/* stars */
 
-@keyframes bgmove{
-0%{background-position:left}
-100%{background-position:right}
+.star{
+position:fixed;
+width:2px;
+height:2px;
+background:white;
+border-radius:50%;
+animation:twinkle 2s infinite alternate;
+}
+
+@keyframes twinkle{
+from{opacity:0.2}
+to{opacity:1}
 }
 
 /* card */
 
 .card{
-
 width:90%;
 max-width:420px;
-
 margin:auto;
-margin-top:90px;
-
-padding:35px;
-
-background:rgba(255,255,255,0.18);
-
-backdrop-filter:blur(25px);
-
-border-radius:28px;
-
-box-shadow:
-0 20px 50px rgba(0,0,0,0.25),
-inset 0 0 20px rgba(255,255,255,0.2);
-
-animation:fadeUp 1.2s ease;
+margin-top:70px;
+padding:30px;
+background:rgba(255,255,255,0.1);
+backdrop-filter:blur(20px);
+border-radius:25px;
 }
 
-@keyframes fadeUp{
-
-0%{
-opacity:0;
-transform:translateY(40px);
-}
-
-100%{
-opacity:1;
-transform:translateY(0);
-}
-
-}
-
-/* title */
+/* neon name */
 
 h1{
 font-family:'Great Vibes';
-font-size:46px;
-margin-bottom:10px;
-text-shadow:0 0 15px rgba(255,255,255,0.5);
+font-size:50px;
+text-shadow:
+0 0 5px #fff,
+0 0 10px #ff4da6,
+0 0 20px #ff4da6,
+0 0 40px #ff4da6;
 }
 
 /* message */
 
 #message{
-
 font-family:'Great Vibes';
-
-font-size:30px;
-
-line-height:45px;
-
-min-height:220px;
-
-padding:10px;
-
-animation:fadeIn 1s;
+font-size:28px;
+min-height:180px;
+line-height:40px;
 }
 
-/* signature */
+/* 3D heart */
 
-.signature{
-
-margin-top:15px;
-
-font-size:20px;
-
-opacity:0.9;
-
-}
-
-/* heart */
-
-.heart{
-
-font-size:70px;
-
-margin-top:15px;
-
+.heart3d{
+font-size:80px;
+margin:10px 0;
 animation:beat 1s infinite;
+filter:drop-shadow(0 0 15px #ff2e63);
 }
 
 @keyframes beat{
-
 0%{transform:scale(1)}
 50%{transform:scale(1.25)}
 100%{transform:scale(1)}
-
-}
-
-/* floating hearts */
-
-.fheart{
-
-position:fixed;
-
-color:#ff3d6d;
-
-font-size:20px;
-
-animation:float 7s linear infinite;
-}
-
-@keyframes float{
-
-0%{transform:translateY(100vh)}
-100%{transform:translateY(-10vh)}
-
 }
 
 /* petals */
 
 .petal{
-
 position:fixed;
-
 top:-10px;
-
-width:12px;
-height:12px;
-
-background:rgba(255,192,203,0.9);
-
+width:14px;
+height:14px;
+background:radial-gradient(circle,#ff9bb3,#ff4d6d);
 border-radius:50%;
-
 animation:fall linear infinite;
 }
 
 @keyframes fall{
-
-to{
-transform:translateY(110vh) rotate(360deg);
+to{transform:translateY(110vh) rotate(360deg);}
 }
 
+/* floating hearts */
+
+.fheart{
+position:fixed;
+color:#ff2e63;
+font-size:20px;
+animation:float 7s linear infinite;
+}
+
+@keyframes float{
+0%{transform:translateY(100vh)}
+100%{transform:translateY(-10vh)}
+}
+
+/* love animation */
+
+.love-animation{
+margin-top:100px;
+cursor:pointer;
+}
+
+.lttr{
+font-family:'Great Vibes';
+font-size:65px;
+fill:#fff;
+stroke:#ff2e63;
+stroke-width:2;
+opacity:0;
+filter:drop-shadow(0 0 10px #ff2e63);
+}
+
+.tap{
+margin-top:10px;
+font-size:14px;
+opacity:0.8;
 }
 
 </style>
@@ -177,116 +145,119 @@ transform:translateY(110vh) rotate(360deg);
 
 <body>
 
-<audio autoplay loop>
-<source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_8cdb0c24fd.mp3">
-</audio>
-
 <div class="card">
 
-<h1>Mallika ❤️</h1>
+<h1>Mallika</h1>
 
-<div class="heart">❤️</div>
+<div class="heart3d">❤️</div>
 
 <div id="message"></div>
 
-<div class="signature">— Vikash 💌</div>
+<div style="margin-top:10px;">— Vikash 💌</div>
+
+</div>
+
+<div class="love-animation" onclick="playLove()">
+
+<svg viewBox="0 0 900 150">
+
+<text x="50" y="90" class="lttr">I</text>
+<text x="120" y="90" class="lttr">L</text>
+<text x="170" y="90" class="lttr">O</text>
+<text x="230" y="90" class="lttr">V</text>
+<text x="290" y="90" class="lttr">E</text>
+<text x="360" y="90" class="lttr">Y</text>
+<text x="420" y="90" class="lttr">O</text>
+<text x="480" y="90" class="lttr">U</text>
+<text x="580" y="90" class="lttr">B</text>
+<text x="640" y="90" class="lttr">E</text>
+<text x="700" y="90" class="lttr">T</text>
+<text x="760" y="90" class="lttr">U</text>
+
+</svg>
+
+<div class="tap">Tap here ❤️</div>
 
 </div>
 
 <script>
 
+/* stars */
+
+for(let i=0;i<80;i++){
+let s=document.createElement("div")
+s.className="star"
+s.style.left=Math.random()*100+"%"
+s.style.top=Math.random()*100+"%"
+s.style.animationDuration=1+Math.random()*3+"s"
+document.body.appendChild(s)
+}
+
 /* romantic messages */
 
 let messages=[
 
-`If you are reading this...
+`
+If you are reading this,
 
-it means
+it means you found
+my little surprise.
 
-somewhere
+And honestly,
 
-someone
+I just wanted to remind you
+how lucky I feel
+to have you.`,
 
-misses you
+`
 
-a little too much ❤️`,
-
-`Out of millions of people
+Out of millions
+of people in this world,
 
 my heart somehow
+chose you.
 
-found its way
+And I would choose you
+again and again.`,
 
-to you ❤️`,
+`
+Your smile
+is my favourite thing
+in this world.
 
-`Some people
+Whenever you smile,
+everything feels
+a little more beautiful.`,
 
-make life beautiful
+`
+No matter how busy
+life gets,
 
-just by existing
+one thing will
+always stay the same...
 
-and you are
+I will always
+care about you.`,
 
-one of them ❤️`,
+`
+I don't just love you
+because you're beautiful.
 
-`Every time I hear your name
-
-my heart
-
-forgets
-
-how to stay calm ❤️`,
-
-`If happiness had a face
-
-it would look
-
-a little bit
-
-like you ❤️`,
-
-`The world feels
-
-a little softer
-
-when I think
-
-about you ❤️`
+I love you because
+you make my life
+feel special.`
 
 ]
 
-/* choose random message */
-
 let text=messages[Math.floor(Math.random()*messages.length)]
-
 let i=0
 
 function type(){
-
 if(i<text.length){
-
 document.getElementById("message").innerHTML+=text.charAt(i)
-
 i++
-
 setTimeout(type,40)
-
 }
-
-else{
-
-confetti({
-
-particleCount:150,
-
-spread:110,
-
-origin:{y:0.6}
-
-})
-
-}
-
 }
 
 type()
@@ -294,40 +265,51 @@ type()
 /* floating hearts */
 
 setInterval(()=>{
-
 let h=document.createElement("div")
-
 h.className="fheart"
-
 h.innerHTML="❤️"
-
 h.style.left=Math.random()*100+"%"
-
 document.body.appendChild(h)
-
 setTimeout(()=>h.remove(),7000)
-
 },700)
 
 /* petals */
 
 setInterval(()=>{
-
 let p=document.createElement("div")
-
 p.className="petal"
-
 p.style.left=Math.random()*100+"%"
-
 p.style.animationDuration=5+Math.random()*5+"s"
-
 document.body.appendChild(p)
-
 setTimeout(()=>p.remove(),10000)
-
 },500)
+
+/* tap animation */
+
+function playLove(){
+
+confetti({
+particleCount:200,
+spread:120,
+origin:{y:0.7}
+})
+
+anime.timeline()
+
+.add({
+targets:'.lttr',
+opacity:[0,1],
+translateY:[40,0],
+scale:[0.8,1],
+easing:"easeOutExpo",
+duration:1200,
+delay:(el,i)=>120*i
+})
+
+}
 
 </script>
 
 </body>
 </html>
+
